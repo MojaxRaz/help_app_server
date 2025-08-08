@@ -12,8 +12,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// ✅ Home route for health check
+app.get('/', (req, res) => {
+  res.send('✅ Backend is running and database is connected.');
+});
+
 // 🔁 Start cleanup cron job
-require('./jobs/cleanup'); // 👈 Import this line to enable cleanup job
+require('./jobs/cleanup');
 
 // Routes
 app.use('/api/alerts', require('./routes/alertRoutes'));
